@@ -1,0 +1,17 @@
+trigger:
+  - main  
+
+pool:
+  vmImage: ubuntu-latest  # Käytetään Ubuntu-käyttöjärjestelmää rakennusympäristössä
+
+steps:
+  # Step 1: Checkout the code
+  - checkout: self  # Lataa koodi repositoriosta
+
+  # Step 2: Julkaise artefaktit (esimerkiksi käytettäväksi toisessa pipeline:ssa tai julkaisuun)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: '$(Build.ArtifactStagingDirectory)'  # Artefaktin sijainti
+      artifactName: 'drop'  # Julkaisun nimi
+      publishLocation: 'Container'  # Julkaisupaikka
+    displayName: 'Publish Artifact'
